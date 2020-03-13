@@ -12,7 +12,6 @@ from sklearn import metrics
 from sklearn.metrics import precision_recall_fscore_support
 from sklearn.preprocessing import StandardScaler
 random.seed(42)
-from sklearn.feature_extraction.text import CountVectorizer
 from sklearn.decomposition import PCA
 
 ###### PART 1
