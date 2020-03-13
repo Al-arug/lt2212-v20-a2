@@ -13,6 +13,8 @@ from sklearn.metrics import precision_recall_fscore_support
 from sklearn.preprocessing import StandardScaler
 random.seed(42)
 from sklearn.feature_extraction.text import CountVectorizer
+from sklearn.decomposition import PCA
+
 ###### PART 1
 #DONT CHANGE THIS FUNCTION
 def part1(samples):
@@ -28,11 +30,8 @@ def extract_features(samples):
     print("Extracting features ...")
    
     tokenized=[[word.lower() for word in document.split() if word.isalpha() if len(word)>2]for document in samples]
-    
-    words={word for document in tokenized for word in document} # a dict to get only 1 token of each unique word
-  
+    words={word for document in tokenized for word in document} # a dict to get only 1 token of each unique word/feature
     words_index={x:y for y,x in enumerate(words)}
-   
    
     corpus=[]
     for document in tokenized:
@@ -40,7 +39,6 @@ def extract_features(samples):
         corpus.append(v)
         
     f= np.zeros((len(samples),len(words)),dtype=int) 
-    
     i=0
     for doc in corpus:
         for word in doc:
@@ -49,12 +47,7 @@ def extract_features(samples):
         
     l= np.sum(f,axis=0)          
     x=f[:,(l>20)]
-    
- 
-   # svd = TruncatedSVD(n_components=int((len(x[0,:]))//2))
-    #r=svd.fit_transform(x)
-    
-    
+
     return  x
   
 ##### PART 2
@@ -82,7 +75,7 @@ def reduce_dim(X,n):
 #DONT CHANGE THIS FUNCTION EXCEPT WHERE INSTRUCTED
 def get_classifier(clf_id):
     if clf_id == 1:
-        clf = LDA(n_components=1) # <--- REPLACE THIS WITH A SKLEARN MODEL
+        clf = LDA() # <--- REPLACE THIS WITH A SKLEARN MODEL
     elif clf_id == 2:
         clf = SVC(kernel='linear') # <--- REPLACE THIS WITH A SKLEARN MODEL
     else:
