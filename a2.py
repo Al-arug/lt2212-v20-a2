@@ -29,11 +29,7 @@ def extract_features(samples):
     print("Extracting features ...")
    
     tokenized=[[word.lower() for word in document.split() if word.isalpha() if len(word)>2]for document in samples]
-<<<<<<< HEAD
     words={word for document in tokenized for word in document} # a dict to get only 1 token of each unique word/feature
-=======
-    words={word for document in tokenized for word in document} # a dict to get only 1 token of each unique words
->>>>>>> a363234d9c92de581f92ff18c9719a35053e5a7c
     words_index={x:y for y,x in enumerate(words)}
    
     corpus=[]
@@ -50,13 +46,6 @@ def extract_features(samples):
         
     l= np.sum(f,axis=0)          
     x=f[:,(l>20)]
-<<<<<<< HEAD
-
-=======
-    
-   # svd = TruncatedSVD(n_components=int((len(x[0,:]))//2))
-    #r=svd.fit_transform(x)
->>>>>>> a363234d9c92de581f92ff18c9719a35053e5a7c
     return  x
   
 ##### PART 2
@@ -124,18 +113,12 @@ def part3(X, y, clf_id):
 
 def shuffle_split(X,y):
     X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2,shuffle=True)
-   # scaler = StandardScaler()  #Normalizing data to adjust in a scale 1 to -1 of which the mean is 0 
-    #scaler.fit(X_train)
-    #X_train = scaler.transform(X_train)
-    #X_test = scaler.transform(X_test)
-    
     return X_train, X_test, y_train, y_test
 
 
 
 def train_classifer(clf, X, y):
     assert is_classifier(clf)
-    
     model=clf.fit(X,y)
     return model
 
