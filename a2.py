@@ -28,9 +28,7 @@ def extract_features(samples):
     print("Extracting features ...")
    
     tokenized=[[word.lower() for word in document.split() if word.isalpha() if len(word)>2]for document in samples]
-    
-    words={word for document in tokenized for word in document} # a dict to get only 1 token of each unique word
-  
+    words={word for document in tokenized for word in document} # a dict to get only 1 token of each unique words
     words_index={x:y for y,x in enumerate(words)}
    
    
@@ -40,7 +38,6 @@ def extract_features(samples):
         corpus.append(v)
         
     f= np.zeros((len(samples),len(words)),dtype=int) 
-    
     i=0
     for doc in corpus:
         for word in doc:
@@ -50,11 +47,8 @@ def extract_features(samples):
     l= np.sum(f,axis=0)          
     x=f[:,(l>20)]
     
- 
    # svd = TruncatedSVD(n_components=int((len(x[0,:]))//2))
     #r=svd.fit_transform(x)
-    
-    
     return  x
   
 ##### PART 2
