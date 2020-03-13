@@ -32,10 +32,7 @@ def extract_features(samples):
     words={word for document in tokenized for word in document} # a dict to get only 1 token of each unique word
   
     words_index={x:y for y,x in enumerate(words)}
-    #lists=[i for i in samples]
-    #vectorizer = CountVectorizer()
-    #X = vectorizer.fit_transform(lists)
-    #C=X.toarray()
+   
    
     corpus=[]
     for document in tokenized:
